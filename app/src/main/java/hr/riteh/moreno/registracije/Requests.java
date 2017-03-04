@@ -115,7 +115,7 @@ public class Requests {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                dialog.hide();
+                dialog.dismiss();
             }
         });
 
@@ -157,7 +157,7 @@ public class Requests {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                dialog.hide();
+                dialog.dismiss();
             }
         });
 
@@ -179,7 +179,6 @@ public class Requests {
             for (String num2 : numbers2){
                 for (String num3 : numbers3){
                     for (String num4 : numbers4){
-                        Log.e(TAG, num4);
                         for (String let1 : letters1){
                             for (String let2 : letters2){
                                 String reg = num1 + num2 + num3 + num4 + let1 + let2;
@@ -199,7 +198,7 @@ public class Requests {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                dialog.hide();
+                dialog.dismiss();
             }
         });
 

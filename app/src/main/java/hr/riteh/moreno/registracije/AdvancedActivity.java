@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class AdvancedActivity extends AppCompatActivity implements MultiSelectSpinner.OnMultipleItemsSelectedListener {
+public class AdvancedActivity extends AppCompatActivity implements MultiSelectSpinner.OnMultipleItemsSelectedListener, View.OnFocusChangeListener {
     private static final String TAG = "AdvancedActivity";
 
     private Requests requests = new Requests(AdvancedActivity.this);
@@ -82,7 +83,7 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
                 //Log.e(TAG, String.valueOf(num1.getSelectedStrings().isEmpty()));
 
                 if(num1.getSelectedStrings().isEmpty() || num2.getSelectedStrings().isEmpty() ||
-                        num3.getSelectedStrings().isEmpty() || let1.getSelectedStrings().isEmpty()){
+                        num3.getSelectedStrings().isEmpty() || let1.getSelectedStrings().isEmpty() || advancedCaptcha.getText().toString().isEmpty()) {
                     Toast toast = Toast.makeText(AdvancedActivity.this, "Unesite obavezna polja!", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
@@ -154,12 +155,23 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
                         confirmDialog.show();
                     }
                 }
-
-
             }
         });
+
+        advancedCaptcha.setOnFocusChangeListener(this);
     }
 
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            hideKeyboard(v);
+        }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(MainActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
     @Override
     public void selectedIndices(List<Integer> indices) {

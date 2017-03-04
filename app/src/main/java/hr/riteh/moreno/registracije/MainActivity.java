@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener{
 
     private Requests requests = new Requests(MainActivity.this);
 
@@ -73,7 +74,13 @@ public class MainActivity extends AppCompatActivity {
                 int questionNum = regNumberString.length() - regNumberString.replace("?", "").length();
                 int questionLet = regLettersString.length() - regLettersString.replace("?", "").length();
 
-                if((checkStringNum >= 0 && checkStringLet >= 0) || questionNum >= 2 || questionLet >= 2){
+                if(regNumberString.isEmpty() || regLettersString.isEmpty() || captchaString.isEmpty()){
+                    dialog.dismiss();
+                    Toast toast = Toast.makeText(MainActivity.this, "Unesite sva polja!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+                else if((checkStringNum >= 0 && checkStringLet >= 0) || questionNum >= 2 || questionLet >= 2){
                     dialog.dismiss();
                     Toast toast = Toast.makeText(MainActivity.this, "Moguće upisati samo jedan upitnik." +
                             " Korisitite napredno pretraživanje!", Toast.LENGTH_SHORT);
@@ -131,5 +138,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        regNumber.setOnFocusChangeListener(this);
+        regLetters.setOnFocusChangeListener(this);
+        captchaText.setOnFocusChangeListener(this);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            hideKeyboard(v);
+        }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(MainActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
