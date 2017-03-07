@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -18,7 +19,6 @@ import android.widget.Toast;
 import java.util.List;
 
 public class AdvancedActivity extends AppCompatActivity implements MultiSelectSpinner.OnMultipleItemsSelectedListener, View.OnFocusChangeListener {
-    private static final String TAG = "AdvancedActivity";
 
     private Requests requests = new Requests(AdvancedActivity.this);
 
@@ -26,6 +26,10 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         final Spinner spinner = (Spinner) findViewById(R.id.advancedCity);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities_array,
@@ -79,8 +83,6 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.e(TAG, String.valueOf(num1.getSelectedStrings().size()));
-                //Log.e(TAG, String.valueOf(num1.getSelectedStrings().isEmpty()));
 
                 if(num1.getSelectedStrings().isEmpty() || num2.getSelectedStrings().isEmpty() ||
                         num3.getSelectedStrings().isEmpty() || let1.getSelectedStrings().isEmpty() || advancedCaptcha.getText().toString().isEmpty()) {
@@ -159,6 +161,17 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
         });
 
         advancedCaptcha.setOnFocusChangeListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

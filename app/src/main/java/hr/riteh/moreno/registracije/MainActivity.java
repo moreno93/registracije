@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -21,10 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     private Requests requests = new Requests(MainActivity.this);
 
     private String response;
-
-    //public final static String EXTRA_MESSAGE = "hr.riteh.moreno.registracije.MESSAGE";
-
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

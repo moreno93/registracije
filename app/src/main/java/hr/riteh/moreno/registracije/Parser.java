@@ -2,7 +2,6 @@ package hr.riteh.moreno.registracije;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import java.util.ArrayList;
  */
 
 public class Parser extends AsyncTask<String, Void, ArrayList<Cars>> {
-    private static final String TAG = "Parser";
     private Activity activity;
     //private ArrayList<Cars> dataList = new ArrayList<>();
     private Cars car;

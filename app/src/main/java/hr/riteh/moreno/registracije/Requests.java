@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -147,7 +146,6 @@ public class Requests {
             }
         }
 
-        //Log.e(TAG, registrations.toString());
 
         for (String registration : registrations){
             makeRequest(city, registration, captcha, dialog);
