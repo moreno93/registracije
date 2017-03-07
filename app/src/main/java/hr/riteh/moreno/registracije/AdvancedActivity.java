@@ -113,7 +113,7 @@ public class AdvancedActivity extends AppCompatActivity implements MultiSelectSp
                     if (combinations > 50){
                         Toast toast = Toast.makeText(AdvancedActivity.this, "Prevelik broj kombinacija (" + combinations.toString() +
                             "). Maksimalan broj kombinacija je 50. Smanjite broj znakova!", Toast.LENGTH_SHORT);
-                        toast.show();;
+                        toast.show();
                     } else {
                         AlertDialog.Builder confirmBuilder = new AlertDialog.Builder(AdvancedActivity.this);
                         confirmBuilder.setMessage("Ukupan broj mogućih kombinacija iznosi " + combinations.toString() +
